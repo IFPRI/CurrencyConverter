@@ -1,0 +1,20 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-color: #429d46;
+	font-family: "myriad-pro-condensed", sans-serif;
+	color: white;
+}
+
+#successfulUpload {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #429d46;
+	font-size: 2em;
+	color: white;
+	text-align: center;
+	width: 50%;
+	height: 50%;
+}
