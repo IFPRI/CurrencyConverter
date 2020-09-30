@@ -49,7 +49,8 @@ $(document).ready(function() {
     csvContents.id = 'csvContents';
     document.body.appendChild(csvContents);
 
-    loadCSVList().done(processCSVList).done(loadCSV).done(populateDropDowns);
+	loadCSVList();
+    //loadCSVList().done(processCSVList).done(loadCSV).done(populateDropDowns);
     $( "#monthPicker" ).datepicker();    
 });
 
@@ -90,59 +91,65 @@ function Popup(data)
 
 
 function loadCSVList(){
-	return $.ajax({
-        	type: "GET",
-        	url: "/CurrencyConverter/getCSVList",
-        	dataType: 'xml',
-        	async: false, 
-        	cache: false
-    	});
+	//load file list from Github : ref: https://javascript.info/async-await
+	(async () => {
+        const response = await fetch('https://api.github.com/repos/IFPRI/CurrencyConverter/contents/csv');
+        const data = await response.json();
+        let htmlString = '<response>';
+        for (let file of data) {
+			if(file.name != 'currency.csv'){
+				htmlString += `<csv>${file.name}</csv>`;
+			}          
+        }
+		htmlString += '</response>';	
+		var xmlDoc = (new DOMParser()).parseFromString(htmlString, "text/xml");	
+		
+		var csvList = await processCSVList(xmlDoc);
+		var load_csv = await loadCSV();
+		var popresutl = await populateDropDowns();
+    })()
+	
 }
 
+function processCSVList( data ) {	
+	var x = document.getElementById("csvDropdown");
 
-
-function processCSVList( data ) {
-        var x = document.getElementById("csvDropdown");
-
-        var sorteddata = filterFileByDateOrder(data, 24);
-        for(var i = 0; i < sorteddata.length; i++) {
-                var fileName = sorteddata[i];
-/*
-        for(var i = 0; i < data.childNodes[0].childNodes.length; i++){
-        	var fileName = data.childNodes[0].childNodes[i].textContent;
-*/
-        	if(stringContainsCharacters(fileName) ){
+	var sorteddata = filterFileByDateOrder(data, 24);
+	for(var i = 0; i < sorteddata.length; i++) {
+		var fileName = sorteddata[i];
+		if(stringContainsCharacters(fileName) ){
 	       	var option = document.createElement("option");
 	       	option.id = fileName;
 	        option.text = fileName;
 	        option.value = fileName;
 	        x.add(option);
 		}
-        };
+    };
 	document.getElementById("csvDropdown").selectedIndex = 0;
 }
 
 function filterFileByDateOrder (data, datacount) {
-	var temp_data = data.childNodes[0].childNodes;
+	var temp_data = data.childNodes[0].childNodes;	
 	// gather date data for sorting from pattern of 'currency_8.1.2018.csv'
 	var dateFileArray = [];//key:date (ex 201808), value:file name
 	var datekey = '';
 	var filename = '';
 	var temp_array = [];
 	for (var i=0; i< temp_data.length; i++){
-	     filename = temp_data[i].textContent;
-             if(filename.length > 1){
-		temp_array = [];
-		temp_array = filename.split("_");
-                var temp_str = ""+temp_array[1];
-		temp_array = temp_str.split(".");
-                var monthstring = '';
-                if(temp_array.length > 0){
-                  monthstring = temp_array[0]+"";
-		  datekey = temp_array[2]+((monthstring.length == 1)? "0"+temp_array[0] : temp_array[0]);
-		  dateFileArray.push(datekey+"&"+filename);
-                }
-             }
+	    filename = temp_data[i].textContent;
+		 
+        if(filename.length > 1){
+			temp_array = [];
+			temp_array = filename.split("_");
+			var temp_str = ""+temp_array[1];
+			temp_array = temp_str.split(".");
+			var monthstring = '';
+			if(temp_array.length > 0){
+				monthstring = temp_array[0]+"";
+				datekey = temp_array[2]+((monthstring.length == 1)? "0"+temp_array[0] : temp_array[0]);
+				dateFileArray.push(datekey+"&"+filename);
+            }
+        }
 	} 
 	// sort dataFileArray desc
 	dateFileArray.sort();
@@ -159,7 +166,6 @@ function filterFileByDateOrder (data, datacount) {
 	}*/
 	return sortedArray;
 }
-
 
 function checkPassword(){
 	if( $('#fileInput').val().includes('.csv') ){
@@ -184,26 +190,21 @@ function checkPassword(){
 	}
 }
 
-
-
 function loadCSV(){
 	document.getElementById('csvContents').innerHTML = '';
-    $.ajax({
-        type: "GET",
-        url: "csv/" + document.getElementById("csvDropdown").value,
-        dataType: "text",
-        cache: false,
-        async: false,
-        success: function(data) {
-        	if(!data.startsWith("From")){
-        		data = "From,To,Foreign Currency Name,Rate,Date,time,\n" + data;
-        	}
-            processData( data )
-	if(window.location.href == "http://currencyconverter.ifpri.org/")
-            setWidth();
-        }
-    });	
-    
+	(async () => {
+        const response = await fetch('https://raw.githubusercontent.com/IFPRI/CurrencyConverter/master/csv/' + document.getElementById("csvDropdown").value);
+		const data = await response.text();
+		var mdata = '';
+		if(!data.startsWith("From")){
+			mdata = "From,To,Foreign Currency Name,Rate,Date,time,\n" + data;
+		}
+		const pdata = processData( mdata );
+		if(window.location.href == "http://currencyconverter.ifpri.org/")
+			setWidth();
+		
+    })()
+
 }
 
 function fileSelected() {
@@ -224,6 +225,7 @@ function setWidth() {
 }
 
 function processData(allText) {
+	
 	lines.length = 0;
     var allTextLines = allText.split(/\r\n|\n/);
     var headers = allTextLines[0].split(',');
