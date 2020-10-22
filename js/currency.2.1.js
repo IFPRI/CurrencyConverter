@@ -200,6 +200,7 @@ function loadCSV(){
 			mdata = "From,To,Foreign Currency Name,Rate,Date,time,\n" + data;
 		}
 		const pdata = await processData( mdata );
+		const pseudo = await updateExchangeRate(null);
 		const popresutl = await populateDropDowns();
 		if(window.location.href == "http://currencyconverter.ifpri.org/")
 			setWidth();
@@ -399,6 +400,6 @@ function displayData() {
 
 function selectCSV() {
 	loadCSV();
-	updateExchangeRate(null);
+	//updateExchangeRate(null);
     //populateDropDowns();
 }
