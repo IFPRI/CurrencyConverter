@@ -335,6 +335,7 @@ function updateExchangeRate(isFromField) {
     toVal = $('#selectToCurrency').val();
     $('#fromDesc').text(getDescription(fromVal));
     $('#toDesc').text(getDescription(toVal));
+	console.log("updateExchangeRate : fromVal : "+ fromVal);
     if (fromVal != toVal) {
         var found = false;
         for (var i = 0; i < lines.length; i++) {
