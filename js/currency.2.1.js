@@ -263,7 +263,7 @@ function combineArrays(arr1, arr2){
 }
 
 function populateDropDowns() {
-	console.log("populateDropDowns-start");
+	console.log("populateDropDowns-start : lines.length : "+lines.length);
     var fromValues = new Array();
     var toValues = new Array();
     var x = document.getElementById("selectFromCurrency");
@@ -312,8 +312,6 @@ function populateDropDowns() {
     $(y).val("");
 	console.log("populateDropDowns-end");
 }
-
-
 
 function getDescription(acronym) {
     if (acronym == 'USD') {
@@ -404,5 +402,5 @@ function displayData() {
 function selectCSV() {
 	loadCSV();
 	updateExchangeRate(null);
-        populateDropDowns();
+    populateDropDowns();
 }
