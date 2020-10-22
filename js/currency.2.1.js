@@ -190,7 +190,6 @@ function checkPassword(){
 }
 
 function loadCSV(){
-	console.log("loadCSV-start");
 	document.getElementById('csvContents').innerHTML = '';
 	(async () => {
         const response = await fetch('https://raw.githubusercontent.com/IFPRI/CurrencyConverter/master/csv/' + document.getElementById("csvDropdown").value);
@@ -206,7 +205,6 @@ function loadCSV(){
 			setWidth();
 		
     })()
-	console.log("loadCSV-end");
 }
 
 function fileSelected() {
@@ -227,7 +225,6 @@ function setWidth() {
 }
 
 function processData(allText) {
-	console.log("processData-start");
 	lines.length = 0;
     var allTextLines = allText.split(/\r\n|\n/);
     var headers = allTextLines[0].split(',');
@@ -249,7 +246,6 @@ function processData(allText) {
             lines.push(obj);
     }
     displayData();
-	console.log("processData-end : lines.length : "+ lines.length);
 }
 
 function combineArrays(arr1, arr2){
@@ -260,7 +256,6 @@ function combineArrays(arr1, arr2){
 }
 
 function populateDropDowns() {
-	console.log("populateDropDowns-start : lines.length : "+lines.length);
     var fromValues = new Array();
     var toValues = new Array();
     var x = document.getElementById("selectFromCurrency");
@@ -307,7 +302,6 @@ function populateDropDowns() {
 
     $(x).val("");
     $(y).val("");
-	console.log("populateDropDowns-end");
 }
 
 function getDescription(acronym) {
@@ -335,7 +329,6 @@ function updateExchangeRate(isFromField) {
     toVal = $('#selectToCurrency').val();
     $('#fromDesc').text(getDescription(fromVal));
     $('#toDesc').text(getDescription(toVal));
-	console.log("updateExchangeRate : fromVal : ["+ fromVal +"] : toVal : ["+ toVal+"]");
     if (fromVal != toVal) {
         var found = false;
         for (var i = 0; i < lines.length; i++) {
@@ -364,7 +357,6 @@ function updateExchangeRate(isFromField) {
 
 
 function displayData() {
-	console.log("displayData-start");
     var headerDiv = document.createElement('div');
     $('#csvContents').append(headerDiv);
 
@@ -395,7 +387,6 @@ function displayData() {
         }
         $('#csvContents').append(resultDiv);
     }
-	console.log("displayData-end : lines.length : "+ lines.length);
 }
 
 function selectCSV() {
