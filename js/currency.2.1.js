@@ -200,7 +200,6 @@ function loadCSV(){
 			mdata = "From,To,Foreign Currency Name,Rate,Date,time,\n" + data;
 		}
 		const pdata = await processData( mdata );
-		const pseudo = await updateExchangeRate(null);
 		const popresutl = await populateDropDowns();
 		if(window.location.href == "http://currencyconverter.ifpri.org/")
 			setWidth();
@@ -335,7 +334,7 @@ function updateExchangeRate(isFromField) {
     toVal = $('#selectToCurrency').val();
     $('#fromDesc').text(getDescription(fromVal));
     $('#toDesc').text(getDescription(toVal));
-	console.log("updateExchangeRate : fromVal : "+ fromVal);
+	console.log("updateExchangeRate : fromVal : ["+ fromVal +"] : toVal : ["+ toVal+"]");
     if (fromVal != toVal) {
         var found = false;
         for (var i = 0; i < lines.length; i++) {
