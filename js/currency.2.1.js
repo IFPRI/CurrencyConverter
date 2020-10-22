@@ -227,7 +227,7 @@ function setWidth() {
 }
 
 function processData(allText) {
-	
+	console.log("processData-start");
 	lines.length = 0;
     var allTextLines = allText.split(/\r\n|\n/);
     var headers = allTextLines[0].split(',');
@@ -249,6 +249,7 @@ function processData(allText) {
             lines.push(obj);
     }
     displayData();
+	console.log("processData-end : lines.length : "+ lines.length);
 }
 
 function combineArrays(arr1, arr2){
@@ -362,6 +363,7 @@ function updateExchangeRate(isFromField) {
 
 
 function displayData() {
+	console.log("displayData-start");
     var headerDiv = document.createElement('div');
     $('#csvContents').append(headerDiv);
 
@@ -392,7 +394,7 @@ function displayData() {
         }
         $('#csvContents').append(resultDiv);
     }
-
+	console.log("displayData-end : lines.length : "+ lines.length);
 }
 
 function selectCSV() {
