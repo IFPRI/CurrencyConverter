@@ -103,15 +103,19 @@ function loadCSVList(){
         }
 		htmlString += '</response>';	
 		var xmlDoc = (new DOMParser()).parseFromString(htmlString, "text/xml");	
-		
+		console.log("processCSVList-0");
 		var csvList = await processCSVList(xmlDoc);
+		console.log("loadCSV-1");
 		var load_csv = await loadCSV();
+		console.log("populateDropDowns-0");
 		var popresutl = await populateDropDowns();
+		console.log("process-0");
     })()
 	
 }
 
 function processCSVList( data ) {	
+	console.log("processCSVList-start");
 	var x = document.getElementById("csvDropdown");
 
 	var sorteddata = filterFileByDateOrder(data, 24);
@@ -126,6 +130,7 @@ function processCSVList( data ) {
 		}
     };
 	document.getElementById("csvDropdown").selectedIndex = 0;
+	console.log("processCSVList-end");
 }
 
 function filterFileByDateOrder (data, datacount) {
@@ -191,6 +196,7 @@ function checkPassword(){
 }
 
 function loadCSV(){
+	console.log("loadCSV-start");
 	document.getElementById('csvContents').innerHTML = '';
 	(async () => {
         const response = await fetch('https://raw.githubusercontent.com/IFPRI/CurrencyConverter/master/csv/' + document.getElementById("csvDropdown").value);
@@ -204,7 +210,7 @@ function loadCSV(){
 			setWidth();
 		
     })()
-
+	console.log("loadCSV-end");
 }
 
 function fileSelected() {
@@ -256,9 +262,8 @@ function combineArrays(arr1, arr2){
 	return arr1;
 }
 
-
-
 function populateDropDowns() {
+	console.log("populateDropDowns-start");
     var fromValues = new Array();
     var toValues = new Array();
     var x = document.getElementById("selectFromCurrency");
@@ -305,6 +310,7 @@ function populateDropDowns() {
 
     $(x).val("");
     $(y).val("");
+	console.log("populateDropDowns-end");
 }
 
 
