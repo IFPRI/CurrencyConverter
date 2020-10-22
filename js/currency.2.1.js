@@ -103,13 +103,9 @@ function loadCSVList(){
         }
 		htmlString += '</response>';	
 		var xmlDoc = (new DOMParser()).parseFromString(htmlString, "text/xml");	
-		console.log("processCSVList-0");
 		var csvList = await processCSVList(xmlDoc);
-		console.log("loadCSV-1");
 		var load_csv = await loadCSV();
-		console.log("populateDropDowns-0");
 		var popresutl = await populateDropDowns();
-		console.log("process-0");
     })()
 	
 }
@@ -205,7 +201,7 @@ function loadCSV(){
 		if(!data.startsWith("From")){
 			mdata = "From,To,Foreign Currency Name,Rate,Date,time,\n" + data;
 		}
-		const pdata = processData( mdata );
+		const pdata = await processData( mdata );
 		if(window.location.href == "http://currencyconverter.ifpri.org/")
 			setWidth();
 		
