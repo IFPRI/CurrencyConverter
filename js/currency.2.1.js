@@ -399,5 +399,5 @@ function displayData() {
 function selectCSV() {
 	loadCSV();
 	updateExchangeRate(null);
-    populateDropDowns();
+    //populateDropDowns();
 }
