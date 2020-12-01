@@ -94,6 +94,7 @@ function loadCSVList(){
 	//load file list from static code below
 	(async () => {
         let htmlString = '<response>';
+		htmlString += '<csv>currency_12.1.2020.csv</csv>';
         htmlString += '<csv>currency_11.1.2020.csv</csv>';
 		htmlString += '<csv>currency_10.1.2020.csv</csv>';
 		htmlString += '<csv>currency_9.1.2020.csv</csv>';
@@ -105,7 +106,6 @@ function loadCSVList(){
 		htmlString += '<csv>currency_3.1.2020.csv</csv>';
 		htmlString += '<csv>currency_2.1.2020.csv</csv>';
 		htmlString += '<csv>currency_1.1.2020.csv</csv>';
-		htmlString += '<csv>currency_12.1.2019.csv</csv>';
 		htmlString += '</response>';	
 		var xmlDoc = (new DOMParser()).parseFromString(htmlString, "text/xml");	
 		var csvList = await processCSVList(xmlDoc);
