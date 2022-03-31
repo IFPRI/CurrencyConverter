@@ -102,7 +102,7 @@ function loadCSVList(){
 		htmlString += '<csv>currency_7.1.2021.csv</csv>';
 		htmlString += '<csv>currency_6.1.2021.csv</csv>';
 		htmlString += '<csv>currency_5.1.2021.csv</csv>';
-		htmlString += '<csv>currency_4.1.2021.csv</csv>';
+		htmlString += '<csv>currency_4.1.2022.csv</csv>';
 		htmlString += '<csv>currency_3.1.2022.csv</csv>';
 		htmlString += '<csv>currency_2.1.2022.csv</csv>';
 		htmlString += '<csv>currency_1.1.2022.csv</csv>';
