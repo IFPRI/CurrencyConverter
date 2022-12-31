@@ -105,7 +105,7 @@ function loadCSVList(){
 		htmlString += '<csv>currency_4.1.2022.csv</csv>';
 		htmlString += '<csv>currency_3.1.2022.csv</csv>';
 		htmlString += '<csv>currency_2.1.2022.csv</csv>';
-		htmlString += '<csv>currency_1.1.2022.csv</csv>';
+		htmlString += '<csv>currency_1.1.2023.csv</csv>';
 		htmlString += '</response>';	
 		var xmlDoc = (new DOMParser()).parseFromString(htmlString, "text/xml");	
 		var csvList = await processCSVList(xmlDoc);
