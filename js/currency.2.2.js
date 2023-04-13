@@ -399,3 +399,10 @@ function selectCSV() {
 	//updateExchangeRate(null);
     //populateDropDowns();
 }
+
+// workarounds of potential XSS vulnerability in jQuery, js/jquery-ui-1.12.1.custom/external/jquery/jquery.js
+// ref : https://github.com/IFPRI/CurrencyConverter/security/dependabot/1
+
+jQuery.htmlPrefilter = function( html ) {
+	return html;
+};
