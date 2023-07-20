@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head>
+    <title>IFPRI Currency Converter ver 1.0</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline' 'self' https://code.jquery.com/jquery-3.2.1.js https://www.gstatic.com/charts/loader.js; style-src 'self' https://code.jquery.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://raw.githubusercontent.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self';  worker-src 'none';">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains;">
+	<meta http-equiv="X-Content-Type-Options" content="nosniff">
+	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+	<meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="js/MonthPicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/currency.css" media="screen" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--script src='js/currency.2.2.js'></script-->
+	<script src='js/currency.2.3.js'></script>
+</head>
+
+<body>
+	<img id='logo' src='images/IFPRI.svg'></img>
+	<!--div id='uploadCSV'>
+		<div id='directions'>Upload a CSV file to update the exchange rate</div>
+		<form id="csvForm" action="UploadDownloadFileServlet" method="post" enctype="multipart/form-data">
+			Password: <input class="formInput" type="password" id="passwordInput" name="fileName">
+			<input class="formInput" type="file" id="fileInput" name="fileName"></input> <br>
+			<input class="formInput" type="button" value="upload" onclick="checkPassword()"></input>
+		</form>
+	</div-->
+	
+	<div id='printBtn' onclick='PrintElem()'>PRINT</div>
+
+    <div id='selectContainer'>
+	<div id ='title'>Currency Exchange Calculator</div>
+            <div id='controlsContainer'>
+                <div id='fromContainer' class='container'>
+                    <label for="selectFromCurrency">From Currency</label>
+                    <select id='selectFromCurrency' onchange='updateExchangeRate(true)'></select >
+					<div id="fromDesc">United States Dollars</div>
+				</div>
+				<div id='toContainer' class='container'>
+					<label for="selectToCurrency">To Currency</label>
+					<select id='selectToCurrency' onchange='updateExchangeRate(false)'></select >
+					<div id="toDesc">United States Dollars</div>
+				</div>
+				<div id='amountContainer' class='container'>
+					<label for="amount">Currency Amount</label>
+					<input id='amount' type="text" value='0.0' onchange='updateExchangeRate(null)'></input>
+				</div>
+				<div id='convertedTotalContainer'>
+					Converted Total:
+					<div id='convertedTotal'>0.0</div>
+				</div>
+				<div id='exchangeRateContainer'>
+                    Current Exchange Rate
+                    <div id='exchangeRate'>1.0</div>
+                </div>
+			</div>
+	</div>
+	<div id="csvContainer">
+		<label for="csvDropdown">Date Selector for Exchange Values:</label>
+		<select id='csvDropdown' type="text" value='0.0' onchange='selectCSV()'></select>
+	</div>
+</body>
+
+</html>
