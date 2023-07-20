@@ -127,7 +127,7 @@ function getYearMonthInDescOrder(numMonths) {
   
   for (let i = 0; i < numMonths; i++) {
     let year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 2; // Months are zero-indexed, so we add 1 to get the correct month
+    let month = currentDate.getMonth() + 1; // Months are zero-indexed, so we add 1 to get the correct month
 	if(i == 0) {
 	  	const url = "https://currencyconverter.ifpri.org/csv/currency_${month}.1.${year}.csv";
 		isURLReachable(url)
