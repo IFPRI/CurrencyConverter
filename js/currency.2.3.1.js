@@ -91,27 +91,27 @@ function Popup(data)
 
 
 function loadCSVList(){
-	
+	//generate list of 3 items string
+	//let itemstr = getYearMonthInDescOrder(3);
 	//load file list from static code below
 	(async () => {
-        let htmlString = '<response>';
-		//generate list of 3 items string
 		let itemstr = await getYearMonthInDescOrder(3);
-	
+        let htmlString = '<response>';
 		htmlString += itemstr;
+		//htmlString += '<csv>currency_7.1.2023.csv</csv><csv>currency_6.1.2023.csv</csv><csv>currency_8.1.2023.csv</csv>';//'<csv>currency_12.1.2022.csv</csv>';
 		/*
 		htmlString += '<csv>currency_12.1.2022.csv</csv>';
         htmlString += '<csv>currency_11.1.2022.csv</csv>';
 		htmlString += '<csv>currency_10.1.2022.csv</csv>';
 		htmlString += '<csv>currency_9.1.2022.csv</csv>';
-		htmlString += '<csv>currency_8.1.2022.csv</csv>';
+		htmlString += '<csv>currency_8.1.2023.csv</csv>';
 		htmlString += '<csv>currency_7.1.2023.csv</csv>';
 		htmlString += '<csv>currency_6.1.2023.csv</csv>';
 		htmlString += '<csv>currency_5.1.2023.csv</csv>';
 		htmlString += '<csv>currency_4.1.2023.csv</csv>';
 		htmlString += '<csv>currency_3.1.2023.csv</csv>';
 		htmlString += '<csv>currency_2.1.2023.csv</csv>';
-		htmlString += '<csv>currency_1.1.2023.csv</csv>';
+		htmlString += '<csv>currency_1.1.2023.csv</csv>'; 
 		*/
 		htmlString += '</response>';	
 		var xmlDoc = (new DOMParser()).parseFromString(htmlString, "text/xml");	
@@ -130,23 +130,24 @@ async function getYearMonthInDescOrder(numMonths) {
   for (let i = 0; i < numMonths; i++) {
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth() + 1; // Months are zero-indexed, so we add 1 to get the correct month
-	if(i == 0) {
+	if(i == -1) {
 	  	const url = `https://currencyconverter.ifpri.org/csv/currency_${month}.1.${year}.csv`;
+
 		await isURLReachable(url)
 		  .then((result) => {
-			console.log(result);
 			returnStr += `<csv>currency_${month}.1.${year}.csv</csv>`;
 		  })
 		  .catch((error) => {
 			console.error("Error:", error);
 		  });
 	} else {
-      returnStr += `<csv>currency_${month}.1.${year}.csv</csv>`;
+      returnStr += `<csv>currency_${month}.1.${year}.csv</csv>`;	  
 	}
 
     // Move to the previous month
     currentDate.setMonth(currentDate.getMonth() - 1);
   }
+  console.log('final result: '+returnStr);
   return returnStr;
 }
 
@@ -160,6 +161,7 @@ async function isURLReachable(url) {
       return false; // URL is not reachable
     }
   } catch (error) {
+	  console.log("f-return error");
     return false; // Error occurred while fetching the URL, so it is not reachable
   }
 }
