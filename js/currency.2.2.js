@@ -94,7 +94,7 @@ function loadCSVList(){
 	//load file list from static code below
 	(async () => {
         let htmlString = '<response>';
-		htmlString += '<csv>currency_12.1.2022.csv</csv>';
+		htmlString += '<csv>currency_12.1.2023.csv</csv>';
         htmlString += '<csv>currency_11.1.2023.csv</csv>';
 		htmlString += '<csv>currency_10.1.2023.csv</csv>';
 		htmlString += '<csv>currency_9.1.2023.csv</csv>';
