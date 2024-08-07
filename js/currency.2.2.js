@@ -98,7 +98,7 @@ function loadCSVList(){
         htmlString += '<csv>currency_11.1.2023.csv</csv>';
 		htmlString += '<csv>currency_10.1.2023.csv</csv>';
 		htmlString += '<csv>currency_9.1.2023.csv</csv>';
-		htmlString += '<csv>currency_8.1.2023.csv</csv>';
+		htmlString += '<csv>currency_8.1.2024.csv</csv>';
 		htmlString += '<csv>currency_7.1.2024.csv</csv>';
 		htmlString += '<csv>currency_6.1.2024.csv</csv>';
 		htmlString += '<csv>currency_5.1.2024.csv</csv>';
