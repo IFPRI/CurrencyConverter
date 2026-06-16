@@ -67,7 +67,7 @@ function Popup(data)
 
     	var mywindow = window.open('', "IFPRI Exchange Rates", 'height=900, width=756');
     	mywindow.document.write('<html><head><title>IFPRI Exchange Rates:</title>');
-    	mywindow.document.write('<link rel="stylesheet" href="http://currencyconverter.ifpri.org/css/print.css" type="text/css" />');
+    	mywindow.document.write('<link rel="stylesheet" href="https://currencyconverter.ifpri.org/css/print.css" type="text/css" />');
     	mywindow.document.write('</head><body >');
 	
 	var header = mywindow.document.createElement("h1");
