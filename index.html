@@ -3,7 +3,7 @@
 <head>
     <title>IFPRI Currency Converter ver 1.0</title>
 	<meta charset="utf-8">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://code.jquery.com https://www.gstatic.com; style-src 'self' https://code.jquery.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://raw.githubusercontent.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; img-src 'self' data; manifest-src 'self'; media-src 'self';  worker-src 'none';">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://code.jquery.com/jquery-3.2.1.js https://www.gstatic.com/charts/loader.js; style-src 'self' https://code.jquery.com; object-src 'none'; base-uri 'self'; connect-src 'self' https://raw.githubusercontent.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; img-src 'self' data; manifest-src 'self'; media-src 'self';  worker-src 'none';">
     
 	<meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains;">
 	<meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -26,24 +26,24 @@
 <body>
 	<img id='logo' src='images/IFPRI.svg'></img>
 	
-	<div id='printBtn' onclick='PrintElem()'>PRINT</div>
+	<div id='printBtn'>PRINT</div>
 
     <div id='selectContainer'>
 	<div id ='title'>Currency Exchange Calculator</div>
             <div id='controlsContainer'>
                 <div id='fromContainer' class='container'>
                     <label for="selectFromCurrency">From Currency</label>
-                    <select id='selectFromCurrency' onchange='updateExchangeRate(true)'></select >
+                    <select id='selectFromCurrency'></select >
 					<div id="fromDesc">United States Dollars</div>
 				</div>
 				<div id='toContainer' class='container'>
 					<label for="selectToCurrency">To Currency</label>
-					<select id='selectToCurrency' onchange='updateExchangeRate(false)'></select >
+					<select id='selectToCurrency'></select >
 					<div id="toDesc">United States Dollars</div>
 				</div>
 				<div id='amountContainer' class='container'>
 					<label for="amount">Currency Amount</label>
-					<input id='amount' type="text" value='0.0' onchange='updateExchangeRate(null)'></input>
+					<input id='amount' type="text" value='0.0'></input>
 				</div>
 				<div id='convertedTotalContainer'>
 					Converted Total:
@@ -57,7 +57,7 @@
 	</div>
 	<div id="csvContainer">
 		<label for="csvDropdown">Date Selector for Exchange Values:</label>
-		<select id='csvDropdown' type="text" value='0.0' onchange='selectCSV()'></select>
+		<select id='csvDropdown' type="text" value='0.0'></select>
 	</div>
 </body>
 
