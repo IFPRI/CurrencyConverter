@@ -137,7 +137,7 @@ function loadCSVList(){
     })()
 	
 }
-
+/*
 async function getYearMonthInDescOrder(numMonths) {
   //generate list of items string	
   let returnStr = '';
@@ -163,6 +163,35 @@ async function getYearMonthInDescOrder(numMonths) {
     // Move to the previous month
     currentDate.setMonth(currentDate.getMonth() - 1);
   }
+  return returnStr;
+}*/
+
+async function getYearMonthInDescOrder(numMonths) {
+  let returnStr = "";
+  let found = 0;
+
+  // Start from the 1st day of current month to avoid date rollover issues
+  let date = new Date();
+  date = new Date(date.getFullYear(), date.getMonth(), 1);
+
+  while (found < numMonths) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+
+    const fileName = `currency_${month}.1.${year}.csv`;
+    const url = `https://raw.githubusercontent.com/IFPRI/CurrencyConverter/master/csv/${fileName}`;
+
+    const exists = await isURLReachable(url);
+
+    if (exists) {
+      returnStr += `<csv>${fileName}</csv>`;
+      found++;
+    }
+
+    // Move to previous month safely
+    date = new Date(year, date.getMonth() - 1, 1);
+  }
+
   return returnStr;
 }
 
