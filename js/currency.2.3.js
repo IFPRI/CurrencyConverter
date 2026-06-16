@@ -44,6 +44,22 @@ function stringContainsCharacters(str) {
 $(document).ready(function() {
 	$(".ui-icon-circle-triangle-e").empty();
 	$(".ui-icon-circle-triangle-w").empty();
+	
+	$("#printBtn").on("click", PrintElem);
+
+	$("#selectFromCurrency").on("change", function () {
+		updateExchangeRate(true);
+	});
+
+	$("#selectToCurrency").on("change", function () {
+		updateExchangeRate(false);
+	});
+
+	$("#amount").on("change", function () {
+		updateExchangeRate(null);
+	});
+
+	$("#csvDropdown").on("change", selectCSV);
 
     var csvContents = document.createElement('div');
     csvContents.id = 'csvContents';
